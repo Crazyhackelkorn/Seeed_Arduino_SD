@@ -3,40 +3,12 @@
 
 extern "C"
 {
-#include "../fatfs/diskio.h"
-#include "../fatfs/ffconf.h"
-#include "../fatfs/ff.h"
     char CRC7(const char *data, int length);
     unsigned short CRC16(const char *data, int length);
 }
 
-#ifdef KENDRYTE_K210
-#include "SPIClass.h"
-#else
 #include "SPI.h"
-#endif
 
-#ifdef ARDUINO_ARCH_SAMD
-#define LOG(s, l, n)                   \
-    {                                  \
-        SerialUSB.print("staus: ");    \
-        SerialUSB.print(s);            \
-        SerialUSB.print("\tline: ");   \
-        SerialUSB.print(l);            \
-        SerialUSB.print("\tnotice: "); \
-        SerialUSB.println(n);          \
-    }
-#else
-#define LOG(s, l, n)                \
-    {                               \
-        Serial.print("staus: ");    \
-        Serial.print(s);            \
-        Serial.print("\tline: ");   \
-        Serial.print(l);            \
-        Serial.print("\tnotice: "); \
-        Serial.println(n);          \
-    }
-#endif
 
 typedef enum
 {
@@ -74,20 +46,12 @@ namespace
         explicit AcquireSPI(ardu_sdcard_t *card)
             : card(card)
         {
-#ifdef KENDRYTE_K210
-            card->spi->beginTransaction(SPISettings(card->frequency, LSBFIRST, SPI_MODE0));
-#else
             card->spi->beginTransaction(SPISettings(card->frequency, MSBFIRST, SPI_MODE0));
-#endif
         }
         AcquireSPI(ardu_sdcard_t *card, int frequency)
             : card(card)
         {
-#ifdef KENDRYTE_K210
-            card->spi->beginTransaction(SPISettings(card->frequency, LSBFIRST, SPI_MODE0));
-#else
             card->spi->beginTransaction(SPISettings(card->frequency, MSBFIRST, SPI_MODE0));
-#endif
         }
         ~AcquireSPI()
         {
