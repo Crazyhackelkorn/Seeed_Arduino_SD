@@ -680,7 +680,7 @@ DRESULT sd_disk_ioctl(ardu_sdcard_t *card, uint8_t cmd, unsigned long *buff)
 	case 1: // INIT-SD
 		DSTATUS sd_stat=sd_disk_initialize(card);
 		if(sd_stat==0)
-			return RES_OK
+			return RES_OK;
 		else
 			return RES_ERROR;
 	case 2: // DEINIT-SD
