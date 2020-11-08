@@ -678,17 +678,20 @@ DRESULT sd_disk_ioctl(ardu_sdcard_t *card, uint8_t cmd, unsigned long *buff)
     switch (cmd)
     {
 	case 1: // INIT-SD
-		DSTATUS sd_stat=sd_disk_initialize(card);
+		DSTATUS sd_stat;
+		sd_stat=sd_disk_initialize(card);
 		if(sd_stat==0)
 			return RES_OK;
 		else
 			return RES_ERROR;
+		break;
 	case 2: // DEINIT-SD
     	if (card == NULL)
         	return RES_PARERR;
     	card->status |= STA_NOINIT;
     	card->type = CARD_NONE;
     	return RES_OK;
+		break;
     case 3: // CTRL-Sync
     {
         AcquireSPI lock(card);
@@ -699,12 +702,15 @@ DRESULT sd_disk_ioctl(ardu_sdcard_t *card, uint8_t cmd, unsigned long *buff)
         }
     }
         return RES_ERROR;
+		break;
     case 4: // GET_SECTOR_COUNT
         *buff = card->sectors;
         return RES_OK;
+		break;
     case 5: // GET_SECTOR_SIZE:
         *buff = 512;
         return RES_OK;
+		break;
     }
     return RES_PARERR;
 }
