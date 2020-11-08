@@ -32,7 +32,7 @@ uint32_t SD::write(uint8_t *buffer, unsigned long long sector, unsigned int coun
 	return sd_disk_write(&s_card, buffer, sector, count);
 }
 
-uint32_t SD::ioctl(uint8_t ops, void* arg)
+uint32_t SD::ioctl(uint8_t ops)
 {
 	uint32_t res=0;
 	unsigned long buf=0;

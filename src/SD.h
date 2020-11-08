@@ -13,7 +13,7 @@ public:
 	
 	uint32_t read(uint8_t *buffer, unsigned long long sector, unsigned int count);
 	uint32_t write(uint8_t *buffer, unsigned long long sector, unsigned int count);
-	uint32_t ioctl(uint8_t ops, void* arg);
+	uint32_t ioctl(uint8_t ops);
 	sdcard_type_t sdcard_type();
 
 private:
