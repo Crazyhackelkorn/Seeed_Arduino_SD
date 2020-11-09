@@ -1,14 +1,12 @@
 #include "Seeed_sdcard_hal.h"
 #include "Arduino.h"
+#include "SPI.h"
 
 extern "C"
 {
     char CRC7(const char *data, int length);
     unsigned short CRC16(const char *data, int length);
 }
-
-#include "SPI.h"
-
 
 typedef enum
 {
@@ -483,7 +481,7 @@ unsigned long sdGetSectorsCount(ardu_sdcard_t *card)
 }
 
 /*
-    FATFS API
+    vFAT API/
  * */
 
 DSTATUS sd_disk_initialize(ardu_sdcard_t *card)

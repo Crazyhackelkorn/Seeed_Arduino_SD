@@ -1,15 +1,18 @@
-# Seeed-Arduino-SD  <!---[![Build Status](https://travis-ci.com/Seeed-Studio/Seeed_Arduino_FS.svg?branch=master)](https://travis-ci.com/Seeed-Studio/Seeed_Arduino_FS)-->
+# Seeed-Arduino-SD
 
 ## Introduction
 
-An Arduino library for the SD over SPI operation.
+An Arduino library for SD over SPI operation. It implements the needed structure for the Arduino/Ardupy wrapper. For detailed use of an SD card with Ardupy see [Seeed Ardupy SD Card](https://github.com/Crazyhackelkorn/seeed-ardupy-sdcard)
 
-
-## API Reference
-
-Will come later.
+## Note
+**This is not for use with Arduino.** If you want to use a SD card with Seeed Wio terminal or so, look at the original code [Seeed_Arduino_FS](https://github.com/Seeed-Studio/Seeed_Arduino_FS). There is no filesystem included. Only the need hardware functions to init(), read(), write() and ioctl() to a sd card are implemented.
 
 <!---
+## API Reference
+
+Won't come. Detailed use 
+
+
 - boolean begin(uint8_t ssPin, SPIClass& sp, int hz) : config the SPI to control storage device
 
 ```c++
