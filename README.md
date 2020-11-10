@@ -7,83 +7,35 @@ An Arduino library for SD over SPI operation. It implements the needed structure
 ## Note
 **This is not for use with Arduino.** If you want to use a SD card with Seeed Wio terminal or so, look at the original code [Seeed_Arduino_FS](https://github.com/Seeed-Studio/Seeed_Arduino_FS). There is no filesystem included. Only the need hardware functions to init(), read(), write() and ioctl() to a sd card are implemented.
 
-<!---
 ## API Reference
 
-Won't come. Detailed use 
+For detailes, why this funktions are implemented, see [uos.AbstractBlockDev](https://docs.micropython.org/en/latest/library/uos.html#uos.AbstractBlockDev)
 
+- SD (uint8_t cs, SPIClass *spi=&SPI, int hz=5000000):
+	- Create SD object and SPI.begin()
 
-- boolean begin(uint8_t ssPin, SPIClass& sp, int hz) : config the SPI to control storage device
+- ~SD (): Destructor:
+	- stops SPI
+	
+- uint32_t read(uint8_t *buffer, unsigned long long sector, unsigned int count):
+	- read raw data from SD card
 
-```c++
-DEV.begin(SDCARD_SS_PIN,SDCARD_SPI,4000000UL)
-// DEV.begin(104000000UL) //use qspi flash
-```
+- uint32_t write(uint8_t *buffer, unsigned long long sector, unsigned int count):
+	- write raw data to SD card
 
-- sdcard_type_t  cardType() : get SD card type 
+- uint32_t ioctl(uint8_t ops):
+	- 1: initialise the device / get device status
+	- 2: deinitialise/shutdown the device
+	- 3: sync the device
+	- 4: get a count of the number of blocks
+	- 5: get the number of bytes in a block
 
-**Note** : only work with SD card
-
-```c++
-    uint8_t cardType = DEV.cardType();
-    if (cardType == CARD_NONE) {
-        SERIAL.println("No SD card attached");
-        return;
-    }
-```
-
-- sfud_type_t   flashType() : get flash type
-
-**Note** : only work with flash
-
-```c++
-    uint8_t flashType = DEV.flashType();
-    if (flashType == FLASH_NONE) {
-        SERIAL.println("No flash attached");
-        return;
-    }
-```
-
-- uint64_t cardSize(): get SD card size
-
-**Note** : only work with SD card
-
-```c++
-    uint64_t cardSize = DEV.cardSize() / (1024 * 1024);
-    SERIAL.print("SD Card Size: ");
-    SERIAL.print((uint32_t)cardSize);
-    SERIAL.println("MB");
-```
-
-- uint64_t    flashSize() : get flash size
-
-**Note** : only work with flash
-
-```c++
-    uint32_t flashSize = DEV.flashSize() / (1024 * 1024);
-    SERIAL.print("flash Size: ");
-    SERIAL.print((uint32_t)flashSize);
-    SERIAL.println("MB");
-```
-
-- uint64_t totalBytes(): return total Bytes of storage device
-
-```c++
-    uint32_t totalBytes = DEV.totalBytes();
-    SERIAL.print("Total space: ");
-    SERIAL.print(totalBytes / (1024 * 1024));
-    SERIAL.println("MB");
-```
-
-- uint64_t usedBytes(): return used Bytes of storage device
-
-```c++
-    uint32_t usedBytes = DEV.usedBytes();
-    SERIAL.print("Used space: ");
-    SERIAL.print(usedBytes / (1024 * 1024));
-    SERIAL.println("MB");
-```
--->
+- sdcard_type_t sdcard_type():
+    - 0: CARD_NONE,
+    - 1: CARD_MMC,
+    - 2: CARD_SD,
+    - 3: CARD_SDHC,
+    - 4: CARD_UNKNOWN
 
 ----
 
