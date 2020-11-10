@@ -686,7 +686,7 @@ DRESULT sd_disk_ioctl(ardu_sdcard_t *card, uint8_t cmd, unsigned long *buff)
         	return RES_PARERR;
     	card->status |= STA_NOINIT;
     	card->type = CARD_NONE;
-		card->sectors = 0
+		card->sectors = 0;
     	return RES_OK;
 		break;
     case 3: // CTRL-Sync
