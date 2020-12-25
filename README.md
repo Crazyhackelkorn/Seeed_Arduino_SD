@@ -4,6 +4,7 @@
 
 An Arduino library for SD over SPI operation. It implements the needed structure for the Arduino/Ardupy wrapper. For detailed use of an SD card with Ardupy see [Seeed Ardupy SD Card](https://github.com/Crazyhackelkorn/seeed-ardupy-sdcard)
 
+
 ## Note
 **This is not for use with Arduino.** If you want to use a SD card with Seeed Wio terminal or so, look at the original code [Seeed_Arduino_FS](https://github.com/Seeed-Studio/Seeed_Arduino_FS). There is no filesystem included. Only the need hardware functions to init(), read(), write() and ioctl() to a sd card are implemented.
 
