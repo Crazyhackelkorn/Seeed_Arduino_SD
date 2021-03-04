@@ -128,7 +128,10 @@ char sdWriteBytes(ardu_sdcard_t *card, const char *buffer, char token)
         return false;
     }
     card->spi->transfer(token);
-    card->spi->transfer((uint8_t *)buffer, 512);
+    for (uint16_t i = 0; i < 512; i++)
+    {
+        card->spi->transfer((uint8_t)buffer[i]);
+    }
     card->spi->transfer16(crc);
     return (card->spi->transfer(0xFF) & 0x1F);
 }
